@@ -50,7 +50,6 @@ class GlassmorphicContainer extends StatelessWidget {
   /// ),
   /// ```
   // ![An gradient glasmorphic container with the dimensions of 250 square pixels.] [====Example Link==== 🖼🔗]
-  /// (https://flutter.github.io/assets-for-api-docs/assets/widgets/container_a.png)
   final Key key;
 
   /// Align the [child] within the container.
