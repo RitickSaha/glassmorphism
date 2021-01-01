@@ -50,6 +50,7 @@ class GlassmorphicContainer extends StatelessWidget {
   /// ),
   /// ```
   // ![An gradient glasmorphic container with the dimensions of 250 square pixels.] [====Example Link==== 🖼🔗]
+  /// (https://flutter.github.io/assets-for-api-docs/assets/widgets/container_a.png)
   final Key key;
 
   /// Align the [child] within the container.
@@ -181,6 +182,18 @@ class GlassmorphicContainer extends StatelessWidget {
     );
   }
 }
+
+/// This class is responsible for creating a [gradient Border] around
+/// the GlassMorphic Container. 
+/// You must have to change your [flutter channel] to Dev version if 
+/// your want to play with it on the web. currently flutter dosen't 
+/// support custom painter in
+///                [Flutter web]                       [Flutter Apps]             
+///   [master] -- [Not Supported ❌]        :        [  Supported   ✔ ]
+///    [dev]   -- [  Supported   ✔ ]        :        [  Supported   ✔ ]
+///   [beta]   -- [Not Supported ❌]        :        [  Supported   ✔ ]
+///  [stable]  -- [Not Supported ❌]        :        [  Supported   ✔ ]
+
 
 class GlassmorphicBorder extends StatelessWidget {
   final _GradientPainter _painter;
