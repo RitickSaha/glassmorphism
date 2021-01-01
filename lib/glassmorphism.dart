@@ -1,4 +1,4 @@
-library glassmorphism;
+// library glassmorphism;
 
 import 'dart:ui';
 
@@ -166,7 +166,6 @@ class GlassmorphicContainer extends StatelessWidget {
                   borderRadius: BorderRadius.circular(borderRadius),
                   gradient: linearGradient,
                 ),
-                child: child,
               ),
             ),
           ),
@@ -177,6 +176,13 @@ class GlassmorphicContainer extends StatelessWidget {
             height: height,
             gradient: borderGradient,
           ),
+          ClipRRect(
+            clipBehavior: Clip.hardEdge,
+            borderRadius: BorderRadius.circular(borderRadius),
+              child: Container(
+                child: child,
+              ),
+            ),
         ],
       ),
     );
