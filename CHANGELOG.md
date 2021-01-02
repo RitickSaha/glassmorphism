@@ -1,3 +1,6 @@
+## [1.0.3] - 02 January 2021.
+
+-Minor Documentation Changes.
 ## [1.0.1] - 02 January 2021.
 
 -Initial Publish To [`pub.dev`](https://pub.dev/packages/glassmorphism)
