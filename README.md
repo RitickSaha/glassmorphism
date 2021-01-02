@@ -6,7 +6,7 @@ A Flutter package for creating Glassmorphic UI designs in easy and simple manner
 Supports iOS, Android, web , Windows [`Still_Under_Build`], macOS [`Still_Under_Build`], and Linux [`Still_Under_Build`].
 
 <p align="center">
-  <img src="AddLink" />
+  <img src="https://github.com/RitickSaha/glassmophism/blob/master/images/s1.jpg?raw=true" />
   <h1 align="center" style="font-size: 48px;">Glassmorphic Example App. With realtime pub.dev stats📱</h1>
   <h5 align="center">A package that simplefies your urge to create a interactive Glassmorphic Container.</h5>
   <p align="center">Inspired by <a href="https://glassmorphism.com/">Glassmorphism CSS Generator.</a>
