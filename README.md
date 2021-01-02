@@ -7,7 +7,7 @@ A Flutter package for creating Glassmorphic UI designs in easy and simple manner
 Supports iOS, Android, web , Windows [`Still_Under_Build`], macOS [`Still_Under_Build`], and Linux [`Still_Under_Build`].
 
 <p align="center">
-  <img src="__________githublink" />
+  <img src="https://lh3.googleusercontent.com/ogw/ADGmqu9zK3J8NsEqw-kWQUpoCo3MUONjDqU7-Mkm6Em75g=s83-c-mo" />
   <h1 align="center" style="font-size: 48px;">Glassmorphic Example App. With realtime pub.dev stats📱</h1>
   <h5 align="center">A package that simplefies your urge to create a interactive Glassmorphic Container.</h5>
   <p align="center">Inspired by <a href="https://glassmorphism.com/">Glassmorphism CSS Generator.</a>
@@ -113,19 +113,20 @@ class GlassmorphicSampleState extends State<GlassmorphicSample> {
 
 ## Parameters ⚙️
 
-- `height` (double) - Height for the Widget [@required].
-- `width` (double) - Width for the Widget [@required].
-- `borderRadius` (double) - Border Radius for the widget `0` - `any` [@required].
+- `height` (double) **[`required`]** - Height for the Widget **[`required`]**.
+- `width` (double)  **[`required`]**- Width for the Widget **[`@required`]**.
+- `borderRadius` (double) **[`required`]**- Border Radius for the widget `0` - `any` **[`@required`]**.
+- `linearGradient` (LinearGradient) **[`required`]**- Fills the container with the gradient passed.
+- `border` (double) **[`required`]**- Gives Width to the ContainerBorder.
+- `blur` (double) **[`required`]**- Gives BlurFilter to the Container.
+- `borderGradient` (LinearGradient) **[`required`]**- Fills the container's border with the gradient passed.
 - `child` (widget) - [optional parameter] If there is a child widget then the widget will be rendered inside the container.
 - `alignment` (optional) - Handles the alignment [`Default_value`] - [`Alignemt.topleft`].
 - `padding` (EdgeInset) - Used to provide pading to the child widget [`Default_value`] - [`None`].
 - `BoxShape` (Fixed) - This value is fixed to [`BoxFit.rectangle`].
 - `constraints` (ChatUser) - The constructor `width` and `height` arguments are combined with the `constraints` argument to set this property.
-- `margin` (double) - Empty space to surround the [decoration] and [child]..
-- `linearGradient` (LinearGradient) - Fills the container with the gradient passed [@required].
-- `border` (double) - Gives Width to the ContainerBorder [@required].
-- `blur` (double) - Gives BlurFilter to the Container [@required].
-- `borderGradient` (LinearGradient) - Fills the container's border with the gradient passed [@required].
+- `margin` (double) - Empty space to surround the [decoration] and [child].
+
 
 ```dart
   GlassmorphicContainer(
@@ -141,16 +142,20 @@ class GlassmorphicSampleState extends State<GlassmorphicSample> {
   );
 ```
 ## My Socials 👩‍👦‍👦
-> Oficial  [Github](https://www.github.com/riticksaha) 
-> Oficial  [Instagram-offical](https://www.instagram.com/theflutterfoundry/)
-> Oficial  [Twitter-offical](https://twitter.com/flutterfoundry/)
-> Oficial  [Youtube-offical](https://www.youtube.com/channel/UCH7gICVJpoZPRV6h9O6Xu4g)
-> Personal [Instagram](https://www.instagram.com/riticksaha_/)
-> Personal [Twitter](https://www.twitter.com/rsahatwt/)
+- *Official*
+  -   [*Github*](https://www.github.com/riticksaha)
+  -   [*Instagram*](https://www.instagram.com/theflutterfoundry/)
+  -   [*Twitter*](https://twitter.com/flutterfoundry/)
+  -   [*Youtube*](https://www.youtube.com/channel/UCH7gICVJpoZPRV6h9O6Xu4g)
+- *Personal*  
+  -   [Instagram](https://www.instagram.com/riticksaha_/) 
+  -   [Twitter](https://www.twitter.com/rsahatwt/)
 
 ## Credits 👨🏻‍💻
-- The Flutter Foundry 💙 - [Instagram](https://www.instagram.com/theflutterfoundry/)
-- The Flutter Guy 💜 - [Instagram](https://www.instagram.com/theflutterguy)
+
+|[![Logo](https://instagram.fccu1-1.fna.fbcdn.net/v/t51.2885-19/s150x150/121498414_127160592474352_6913857898849122926_n.jpg?_nc_ht=instagram.fccu1-1.fna.fbcdn.net&_nc_ohc=7a3t275xnjUAX-ZZRPy&tp=1&oh=35f73d27f1b47d0a92b1e41f88e709dd&oe=601A79AC "The Flutter Foundry")](https://www.instagram.com/theflutterfoundry)<br>The Flutter Foundry 💙 <br> [Instagram](https://www.instagram.com/theflutterfoundry)|[![Logo](https://instagram.fccu1-1.fna.fbcdn.net/v/t51.2885-19/s150x150/119647734_175669474045404_3361984012886429779_n.jpg?_nc_ht=instagram.fccu1-1.fna.fbcdn.net&_nc_ohc=6ALqpu8rWLIAX-c3EF4&tp=1&oh=1adbf6a0582a17c4d481afc575d06c97&oe=60187121 "The Flutter Guy")](https://www.instagram.com/the.flutter.guy)<br>The Flutter Foundry 💙 <br> [Instagram](https://www.instagram.com/theflutterguy)|
+|:-------------:|:-------------:|
+
 
 ## Found this project useful? ❤️
 
