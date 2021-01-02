@@ -65,7 +65,7 @@ class GlassmorphicSampleState extends State<GlassmorphicSample> {
         child: Stack(
           children: [
             Image.network(
-              "https://github.com/RitickSaha/glassmophism/blob/main/bg.png?raw=true",
+              "https://github.com/RitickSaha/glassmophism/blob/master/example/assets/bg.png?raw=true",
               fit: BoxFit.cover,
               height: double.infinity,
               width: double.infinity,
@@ -162,13 +162,13 @@ If you found this project useful, then please consider giving it a ⭐️ on Git
 
 ## License ⚖️
 
-- [MIT](______Linsese_Addlink______)
+- [MIT](https://github.com/RitickSaha/glassmophism/blob/master/LICENSE)
 
 ## API details 📝
 
-See the [glassmorphic.dart](Addlink______) for more API details
+See the [glassmorphic.dart](https://github.com/RitickSaha/glassmophism/blob/master/lib/glassmorphism.dart) for more API details
 
 ## Issues and feedback 💭
 
 If you have any suggestion for including a feature or if something doesn't work. 
-Feel free to open a Github [issue](____IssueAddlink______) for us to have a discussion on it.
+Feel free to open a Github [issue](https://github.com/RitickSaha/glassmophism/issues) for us to have a discussion on it.
