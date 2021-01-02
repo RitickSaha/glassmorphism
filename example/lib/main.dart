@@ -350,15 +350,18 @@ GlassCard(var context) {
               fontWeight: FontWeight.w400,
             ),
           ),
-          Text(
-            "$details",
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontFamily: 'RobotoMono',
-              fontStyle: FontStyle.italic,
-              fontSize: 18.0,
-              color: Colors.white,
-              fontWeight: FontWeight.w200,
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal:8),
+            child: Text(
+              "$details",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontFamily: 'RobotoMono',
+                fontStyle: FontStyle.italic,
+                fontSize: 18.0,
+                color: Colors.white,
+                fontWeight: FontWeight.w200,
+              ),
             ),
           ),
           SizedBox(height: MediaQuery.of(context).size.height * 0.001),
@@ -463,7 +466,7 @@ class Body2 extends StatelessWidget {
 }
 Future<int> maintest() async {
   final response = await http.Client()
-      .get(Uri.parse("https://pub.dev/packages/neuomorphic_container/score"));
+      .get(Uri.parse("https://pub.dev/packages/glassmorphism/score"));
   if (response.statusCode == 200) {
     var document = parse(response.body);
     likes =
