@@ -14,7 +14,11 @@ Supports iOS, Android, web, Windows [`Still_Under_Build`], macOS [`Still_Under_B
   </p>
 </p>
 
-## Usage 💻
+## Usage 💻  
+
+> [![likes](https://badges.bar/glassmorphism/likes)](https://pub.dev/packages/glassmorphism/score)<br>
+> [![pub points](https://badges.bar/glassmorphism/pub%20points)](https://pub.dev/packages/glassmorphism/score)<br>
+> [![popularity](https://badges.bar/glassmorphism/popularity)](https://pub.dev/packages/glassmorphism/score)<br>
 
 To use this plugin, add `glassmorphism` as a [dependency in your pubspec.yaml file](https://flutter.dev/platform-plugins/).
 Use the below example to get started with the sample example.
