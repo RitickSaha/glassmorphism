@@ -1,7 +1,6 @@
 <p align="center">
   <h1 align="center" style="font-size: 48px;"> Glassmorphic Container 🔨</h1>
-  <p align="center">First version of this v2 is expected in January, the v1 can still be used but do not expect additional development in it. You can still open issues for the v1 to indicate things we need to implement/fix in the v2</p>
-</p>
+  </p>
 
 A Flutter package for creating Glassmorphic UI designs in easy and simple manner!
 Supports iOS, Android, web , Windows [`Still_Under_Build`], macOS [`Still_Under_Build`], and Linux [`Still_Under_Build`].
