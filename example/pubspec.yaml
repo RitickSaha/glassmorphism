@@ -27,11 +27,11 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.1
 
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  glassmorphism:
-    path: ../
+  glassmorphism: ^1.0.1
   html:
   http:
   integration_test:
