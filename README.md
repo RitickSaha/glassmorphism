@@ -156,7 +156,7 @@ class GlassmorphicSampleState extends State<GlassmorphicSample> {
 
 ## Credits 👨🏻‍💻
 
-|[![Logo](https://instagram.fccu1-1.fna.fbcdn.net/v/t51.2885-19/s150x150/121498414_127160592474352_6913857898849122926_n.jpg?_nc_ht=instagram.fccu1-1.fna.fbcdn.net&_nc_ohc=7a3t275xnjUAX-ZZRPy&tp=1&oh=35f73d27f1b47d0a92b1e41f88e709dd&oe=601A79AC "The Flutter Foundry")](https://www.instagram.com/theflutterfoundry)<br>The Flutter Foundry 💙 <br> [Instagram](https://www.instagram.com/theflutterfoundry)|[![Logo](https://instagram.fccu1-1.fna.fbcdn.net/v/t51.2885-19/s150x150/119647734_175669474045404_3361984012886429779_n.jpg?_nc_ht=instagram.fccu1-1.fna.fbcdn.net&_nc_ohc=6ALqpu8rWLIAX-c3EF4&tp=1&oh=1adbf6a0582a17c4d481afc575d06c97&oe=60187121 "The Flutter Guy")](https://www.instagram.com/the.flutter.guy)<br>The Flutter Guy 💙 <br> [Instagram](https://www.instagram.com/the.flutter.guy)|
+|[![Logo](https://instagram.fccu1-1.fna.fbcdn.net/v/t51.2885-19/s150x150/121498414_127160592474352_6913857898849122926_n.jpg?_nc_ht=instagram.fccu1-1.fna.fbcdn.net&_nc_ohc=7a3t275xnjUAX-ZZRPy&tp=1&oh=35f73d27f1b47d0a92b1e41f88e709dd&oe=601A79AC "The Flutter Foundry")](https://www.instagram.com/the.flutter.foundry)<br>The Flutter Foundry 💙 <br> [Instagram](https://www.instagram.com/theflutterfoundry)||
 |:-------------:|:-------------:|
 
 
