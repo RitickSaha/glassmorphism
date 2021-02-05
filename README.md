@@ -156,7 +156,7 @@ class GlassmorphicSampleState extends State<GlassmorphicSample> {
 
 ## Credits 👨🏻‍💻
 
-|[![Logo](https://instagram.fccu1-1.fna.fbcdn.net/v/t51.2885-19/s150x150/121498414_127160592474352_6913857898849122926_n.jpg?_nc_ht=instagram.fccu1-1.fna.fbcdn.net&_nc_ohc=7a3t275xnjUAX-ZZRPy&tp=1&oh=35f73d27f1b47d0a92b1e41f88e709dd&oe=601A79AC "The Flutter Foundry")](https://www.instagram.com/the.flutter.foundry)<br>The Flutter Foundry 💙 <br> [Instagram](https://www.instagram.com/theflutterfoundry)||
+|[![Logo](https://instagram.fccu1-1.fna.fbcdn.net/v/t51.2885-19/s150x150/121498414_127160592474352_6913857898849122926_n.jpg?_nc_ht=instagram.fccu1-1.fna.fbcdn.net&_nc_ohc=7a3t275xnjUAX-ZZRPy&tp=1&oh=35f73d27f1b47d0a92b1e41f88e709dd&oe=601A79AC "The Flutter Foundry")](https://www.instagram.com/the.flutter.foundry)<br>The Flutter Foundry 💙 <br> [Instagram](https://www.instagram.com/the.flutter.foundry)||
 |:-------------:|:-------------:|
 
 
