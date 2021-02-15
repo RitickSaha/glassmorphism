@@ -6,7 +6,7 @@ A Flutter package for creating Glassmorphic UI designs in an easy and simple man
 Supports iOS, Android, web, Windows [`Still_Under_Build`], macOS [`Still_Under_Build`], and Linux [`Still_Under_Build`].
 
 <p align="center">
-  <img src="https://github.com/RitickSaha/glassmorphism/blob/master/images/s1.0.5x.jpg" width="30%" height="30%"/>
+  <img src="https://raw.githubusercontent.com/RitickSaha/glassmophism/master/images/s1.0.5x.jpg" width="30%" height="30%"/>
   <h1 align="center" style="font-size: 48px;">Glassmorphic Example App. With realtime pub.dev stats📱</h1>
   <h5 align="center">A package that simplefies your urge to create a interactive Glassmorphic Container.</h5>
   <p align="center">Inspired by <a href="https://glassmorphism.com/">Glassmorphism CSS Generator.</a>
@@ -22,6 +22,11 @@ Supports iOS, Android, web, Windows [`Still_Under_Build`], macOS [`Still_Under_B
 
 To use this plugin, add `glassmorphism` as a [dependency in your pubspec.yaml file](https://flutter.dev/platform-plugins/).
 Use the below example to get started with the sample example.
+
+>## You can follow this tutorial and work around with the package.
+> Glassmorphism UI Package For @Flutter || UI || A Glassy and easy to use Package #flutter   
+
+[![Everything Is AWESOME](https://raw.githubusercontent.com/RitickSaha/glassmorphism/master/images/embed.png)](https://www.youtube.com/watch?v=MKj_7zyeeOQ "Play the video.")
 
 ## Features 🔮
 
@@ -156,8 +161,7 @@ class GlassmorphicSampleState extends State<GlassmorphicSample> {
 
 ## Credits 👨🏻‍💻
 
-|[![Logo](https://instagram.fccu1-1.fna.fbcdn.net/v/t51.2885-19/s150x150/121498414_127160592474352_6913857898849122926_n.jpg?_nc_ht=instagram.fccu1-1.fna.fbcdn.net&_nc_ohc=7a3t275xnjUAX-ZZRPy&tp=1&oh=35f73d27f1b47d0a92b1e41f88e709dd&oe=601A79AC "The Flutter Foundry")](https://www.instagram.com/the.flutter.foundry)<br>The Flutter Foundry 💙 <br> [Instagram](https://www.instagram.com/the.flutter.foundry)||
-|:-------------:|:-------------:|
+[![Logo](https://instagram.fccu1-1.fna.fbcdn.net/v/t51.2885-19/s150x150/143695225_2940273386249796_9220350399381167555_n.jpg?_nc_ht=instagram.fccu1-1.fna.fbcdn.net&_nc_ohc=LAZn1VRl4yMAX9ny-sg&tp=1&oh=563f77bc55d3da044adefa1ee58d1ddc&oe=6051C59E "The Flutter Foundry")](https://www.instagram.com/the.flutter.foundry)<br>The Flutter Foundry 💙 <br> [Instagram](https://www.instagram.com/theflutterfoundry)
 
 
 ## Found this project useful? ❤️
