@@ -5,19 +5,16 @@ import 'dart:ui';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-/// This Package is created by [Ritick Saha] [The flutter foundry] 
+/// This Package is created by [Ritick Saha] [The flutter foundry]
 /// My [social] handles 🤵🤵🤵:
 /// [Github]            https://www.github.com/riticksaha
 /// [Instagram]         https://www.instagram.com/riticksaha_/
 /// [Twitter]           https://www.twitter.com/rsahatwt/
-/// [Instagram-offical] https://www.instagram.com/theflutterfoundry/
+/// [Instagram-offical] https://www.instagram.com/the.flutter.foundry/
 /// [Twitter-offical]   https://twitter.com/flutterfoundry/
 /// [Youtube-offical]   https://www.youtube.com/channel/UCH7gICVJpoZPRV6h9O6Xu4g
 
-
-
 class GlassmorphicContainer extends StatelessWidget {
- 
   /// Creates a widget that combines custom painting class, positioning, and sizing widgets.
   ///
   /// [info] The `height` and `width` values include the padding.
@@ -57,7 +54,7 @@ class GlassmorphicContainer extends StatelessWidget {
   /// ```
   // ![An gradient glasmorphic container with the dimensions of 250 square pixels.] [====Example Link==== 🖼🔗]
   /// (https://flutter.github.io/assets-for-api-docs/assets/widgets/container_a.png)
-  final Key key;
+  final Key? key;
 
   /// Align the [child] within the container.
   ///
@@ -73,32 +70,24 @@ class GlassmorphicContainer extends StatelessWidget {
   ///    specify an [AlignmentGeometry].
   ///  * [AlignmentDirectional], like [Alignment] for specifying alignments
   ///    relative to text direction.
-  final AlignmentGeometry alignment;
+  final AlignmentGeometry? alignment;
 
   /// Empty space to inscribe inside the [decoration]. The [child], if any, is
   /// placed inside this padding.
   ///
   /// This padding is in addition to any padding inherent in the [decoration];
   /// see [Decoration.padding].
-  final EdgeInsetsGeometry padding;
+  final EdgeInsetsGeometry? padding;
 
-  final double width;
-  final double height;
+  final double? width;
+  final double? height;
 
-  /// Additional constraints to apply to the child.
-  ///
-  /// The constructor `width` and `height` arguments are combined with the
-  /// `constraints` argument to set this property.
-  ///
-  /// The [padding] goes inside the constraints
-  final BoxConstraints constraints;
-  
   /// Empty space to surround the [decoration] and [child].
-  final EdgeInsetsGeometry margin;
+  final EdgeInsetsGeometry? margin;
 
   /// The transformation matrix to apply before painting the container.
   /// it is similar to all the containers
-  final Matrix4 transform;
+  final Matrix4? transform;
 
   /// The [child] contained by the container.
   ///
@@ -108,14 +97,16 @@ class GlassmorphicContainer extends StatelessWidget {
   /// will attempt to be as small as possible.
   ///
   /// {@macro flutter.widgets.ProxyWidget.child
-  final Widget child;
+  final Widget? child;
 
-  /// All the bellow parametrs are used to design the Glassmorphic effects and this effect is used to 
+  /// All the bellow parametrs are used to design the Glassmorphic effects and this effect is used to
   /// improve the performance ans scalablility as per the requirement.
   /// with good response i will try to [add more featurs and resolve the issues] on my github regarding this package
   /// Thanks for the support... even you can contribute to this project on github.
   final double borderRadius;
   final BoxShape shape;
+  final BoxConstraints? constraints;
+
   final double border;
   final double blur;
   final LinearGradient linearGradient;
@@ -126,36 +117,49 @@ class GlassmorphicContainer extends StatelessWidget {
     this.alignment,
     this.padding,
     this.shape = BoxShape.rectangle,
-    this.constraints,
+    BoxConstraints? constraints,
     this.margin,
     this.transform,
-    @required this.width,
-    @required this.height,
-    @required this.borderRadius,
-    @required this.linearGradient,
-    @required this.border,
-    @required this.blur,
-    @required this.borderGradient,
-  })  :assert(margin == null || margin.isNonNegative),
-       assert(padding == null || padding.isNonNegative),
-       assert(constraints == null || constraints.debugAssertIsValid()),
-       super(key: key);
+    required this.width,
+    required this.height,
+    required this.borderRadius,
+    required this.linearGradient,
+    required this.border,
+    required this.blur,
+    required this.borderGradient,
+  })   : assert(margin == null || margin.isNonNegative),
+        assert(padding == null || padding.isNonNegative),
+        assert(constraints == null || constraints.debugAssertIsValid()),
+        constraints = (width != null || height != null)
+            ? constraints?.tighten(width: width, height: height) ??
+                BoxConstraints.tightFor(width: width, height: height)
+            : constraints,
+        super(key: key);
 
- @override
+  @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<AlignmentGeometry>('alignment', alignment, showName: false, defaultValue: null));
-    properties.add(DiagnosticsProperty<EdgeInsetsGeometry>('padding', padding, defaultValue: null));
-    properties.add(DiagnosticsProperty<BoxConstraints>('constraints', constraints, defaultValue: null));
-    properties.add(DiagnosticsProperty<EdgeInsetsGeometry>('margin', margin, defaultValue: null));
+    properties.add(DiagnosticsProperty<AlignmentGeometry>(
+        'alignment', alignment,
+        showName: false, defaultValue: null));
+    properties.add(DiagnosticsProperty<EdgeInsetsGeometry>('padding', padding,
+        defaultValue: null));
+    properties.add(DiagnosticsProperty<BoxConstraints>(
+        'constraints', constraints,
+        defaultValue: null));
+    properties.add(DiagnosticsProperty<EdgeInsetsGeometry>('margin', margin,
+        defaultValue: null));
     properties.add(ObjectFlagProperty<Matrix4>.has('transform', transform));
   }
+
   @override
   Widget build(BuildContext context) {
     return Container(
+      key: key,
       width: width,
       margin: margin,
       alignment: alignment,
+      constraints: BoxConstraints.tightForFinite(),
       height: height,
       transform: transform,
       child: Stack(
@@ -166,7 +170,6 @@ class GlassmorphicContainer extends StatelessWidget {
             child: BackdropFilter(
               filter: ImageFilter.blur(sigmaX: blur, sigmaY: blur * 2),
               child: Container(
-                
                 alignment: alignment ?? Alignment.topLeft,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(borderRadius),
@@ -185,10 +188,10 @@ class GlassmorphicContainer extends StatelessWidget {
           ClipRRect(
             clipBehavior: Clip.hardEdge,
             borderRadius: BorderRadius.circular(borderRadius),
-              child: Container(
-                child: child,
-              ),
+            child: Container(
+              child: child,
             ),
+          ),
         ],
       ),
     );
@@ -196,15 +199,15 @@ class GlassmorphicContainer extends StatelessWidget {
 }
 
 /// This class is responsible for creating a [gradient Border] around
-/// the GlassMorphic Container. 
-/// You must have to change your [flutter channel] to Dev version if 
-/// your want to play with it on the web. currently flutter dosen't 
+/// the GlassMorphic Container.
+/// You must have to change your [flutter channel] to Dev version if
+/// your want to play with it on the web. currently flutter dosen't
 /// support custom painter in
-///                [Flutter web]                       [Flutter Apps]             
-///   [master] -- [Not Supported ❌]        :        [  Supported   ✔ ]
+///                [Flutter web]                       [Flutter Apps]
+///   [master] -- [  Supported   ✔ ]        :        [  Supported   ✔ ]
 ///    [dev]   -- [  Supported   ✔ ]        :        [  Supported   ✔ ]
-///   [beta]   -- [Not Supported ❌]        :        [  Supported   ✔ ]
-///  [stable]  -- [Not Supported ❌]        :        [  Supported   ✔ ]
+///   [beta]   -- [  Supported   ✔ ]        :        [  Supported   ✔ ]
+///  [stable]  -- [  Supported   ✔ ]        :        [  Supported   ✔ ]
 
 class GlassmorphicBorder extends StatelessWidget {
   final _GradientPainter _painter;
@@ -212,11 +215,11 @@ class GlassmorphicBorder extends StatelessWidget {
   final width;
   final height;
   GlassmorphicBorder({
-    @required double strokeWidth,
-    @required double radius,
-    @required Gradient gradient,
-    @required this.height,
-    @required this.width,
+    required double strokeWidth,
+    required double radius,
+    required Gradient gradient,
+    this.height,
+    this.width,
   })  : this._painter = _GradientPainter(
             strokeWidth: strokeWidth, radius: radius, gradient: gradient),
         this._radius = radius;
@@ -243,9 +246,9 @@ class _GradientPainter extends CustomPainter {
   final Gradient gradient;
 
   _GradientPainter(
-      {@required double strokeWidth,
-      @required double radius,
-      @required Gradient gradient})
+      {required double strokeWidth,
+      required double radius,
+      required Gradient gradient})
       : this.strokeWidth = strokeWidth,
         this.radius = radius,
         this.gradient = gradient;
