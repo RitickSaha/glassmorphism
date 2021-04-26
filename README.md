@@ -3,7 +3,7 @@
   </p>
 
 A Flutter package for creating Glassmorphic UI designs in an easy and simple manner!
-Supports iOS, Android, web, Windows [`Still_Under_Build`], macOS [`Still_Under_Build`], and Linux [`Still_Under_Build`].
+Supports iOS, Android, web, Windows, macOS, and Linux.
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/RitickSaha/glassmophism/master/images/s1.0.5x.jpg" width="30%" height="30%"/>
@@ -32,6 +32,7 @@ Use the below example to get started with the sample example.
 
 - Fully customizable components
 - Easy To use
+- Null Safe version
 - Multiple Childs widgets supported
 - Gesture Listener [GestureDetector](https://api.flutter.dev/flutter/widgets/GestureDetector-class.html)
 - Circular Border / Traditional Borders
