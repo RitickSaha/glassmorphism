@@ -1,4 +1,4 @@
-## [2.0.0] - 02 January 2021.
+## [2.0.1] - 26 April 2021.
 
 -Migration to Sound Null safer Version
 
