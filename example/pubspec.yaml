@@ -31,7 +31,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  glassmorphism: ^1.0.1
+  glassmorphism: ^2.0.0
   html:
   http:
   integration_test:
