@@ -10,9 +10,9 @@ import 'package:flutter/material.dart';
 /// [Github]            https://www.github.com/riticksaha
 /// [Instagram]         https://www.instagram.com/riticksaha_/
 /// [Twitter]           https://www.twitter.com/rsahatwt/
-/// [Instagram-offical] https://www.instagram.com/the.flutter.foundry/
-/// [Twitter-offical]   https://twitter.com/flutterfoundry/
-/// [Youtube-offical]   https://www.youtube.com/channel/UCH7gICVJpoZPRV6h9O6Xu4g
+/// [Instagram-official] https://www.instagram.com/the.flutter.foundry/
+/// [Twitter-official]   https://twitter.com/flutterfoundry/
+/// [Youtube-official]   https://www.youtube.com/channel/UCH7gICVJpoZPRV6h9O6Xu4g
 
 class GlassmorphicContainer extends StatelessWidget {
   /// Creates a widget that combines custom painting class, positioning, and sizing widgets.
