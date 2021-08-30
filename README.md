@@ -37,7 +37,71 @@ Use the below example to get started with the sample example.
 - Gesture Listener [GestureDetector](https://api.flutter.dev/flutter/widgets/GestureDetector-class.html)
 - Circular Border / Traditional Borders
 - Gradient Borders
-- Gradient Fill on container [Full_Control_to_User]
+- Gradient Fill on container `[Full Control to User]`
+
+### To use `GlassmorphicContainer` with fixed Height and width:
+
+```dart
+GlassmorphicContainer(
+  width: 350,
+  height: 350,
+  borderRadius: 20,
+  blur: 20,
+  alignment: Alignment.bottomCenter,
+  border: 2,
+  linearGradient: LinearGradient(
+      begin: Alignment.topLeft,
+      end: Alignment.bottomRight,
+      colors: [
+        Color(0xFFffffff).withOpacity(0.1),
+        Color(0xFFFFFFFF).withOpacity(0.05),
+      ],
+      stops: [
+        0.1,
+        1,
+      ]),
+  borderGradient: LinearGradient(
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+    colors: [
+      Color(0xFFffffff).withOpacity(0.5),
+      Color((0xFFFFFFFF)).withOpacity(0.5),
+    ],
+  ),
+  child: null,
+),
+```
+### Use `GlassmorphicFlexContainer` with responsiveness or take child widgets size. :
+
+```dart
+GlassmorphicFlexContainer(
+  borderRadius: 20,
+  blur: 20,
+  padding: EdgeInsets.all(40),
+  alignment: Alignment.bottomCenter,
+  border: 2,
+  linearGradient: LinearGradient(
+      begin: Alignment.topLeft,
+      end: Alignment.bottomRight,
+      colors: [
+        Color(0xFFffffff).withOpacity(0.1),
+        Color(0xFFFFFFFF).withOpacity(0.05),
+      ],
+      stops: [
+        0.1,
+        1,
+      ]),
+  borderGradient: LinearGradient(
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+    colors: [
+      Color(0xFFffffff).withOpacity(0.5),
+      Color((0xFFFFFFFF)).withOpacity(0.5),
+    ],
+  ),
+  child: null,
+),
+```
 
 > example, Simple Glassmorphic Container with Blur.
 
