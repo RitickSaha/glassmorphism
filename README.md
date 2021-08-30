@@ -14,17 +14,16 @@ Supports iOS, Android, web, Windows, macOS, and Linux.
   </p>
 </p>
 
-## Usage 💻  
+## Usage 💻
 
-> [![likes](https://badges.bar/glassmorphism/likes)](https://pub.dev/packages/glassmorphism/score)<br>
-> [![pub points](https://badges.bar/glassmorphism/pub%20points)](https://pub.dev/packages/glassmorphism/score)<br>
-> [![popularity](https://badges.bar/glassmorphism/popularity)](https://pub.dev/packages/glassmorphism/score)<br>
+> [![likes](https://badges.bar/glassmorphism/likes)](https://pub.dev/packages/glassmorphism/score)<br> > [![pub points](https://badges.bar/glassmorphism/pub%20points)](https://pub.dev/packages/glassmorphism/score)<br> > [![popularity](https://badges.bar/glassmorphism/popularity)](https://pub.dev/packages/glassmorphism/score)<br>
 
 To use this plugin, add `glassmorphism` as a [dependency in your pubspec.yaml file](https://flutter.dev/platform-plugins/).
 Use the below example to get started with the sample example.
 
->## You can follow this tutorial and work around with the package.
-> Glassmorphism UI Package For @Flutter || UI || A Glassy and easy to use Package #flutter   
+> ## You can follow this tutorial and work around with the package.
+>
+> Glassmorphism UI Package For @Flutter || UI || A Glassy and easy to use Package #flutter
 
 [![Everything Is AWESOME](https://raw.githubusercontent.com/RitickSaha/glassmorphism/master/images/embed.png)](https://www.youtube.com/watch?v=MKj_7zyeeOQ "Play the video.")
 
@@ -71,6 +70,7 @@ GlassmorphicContainer(
   child: null,
 ),
 ```
+
 ### Use `GlassmorphicFlexContainer` with responsiveness or take child widgets size. :
 
 ```dart
@@ -187,7 +187,7 @@ class GlassmorphicSampleState extends State<GlassmorphicSample> {
 ## Parameters ⚙️
 
 - `height` (double) **[`required`]** - Height for the Widget **[`required`]**.
-- `width` (double)  **[`required`]**- Width for the Widget **[`@required`]**.
+- `width` (double) **[`required`]**- Width for the Widget **[`@required`]**.
 - `borderRadius` (double) **[`required`]**- Border Radius for the widget `0` - `any` **[`@required`]**.
 - `linearGradient` (LinearGradient) **[`required`]**- Fills the container with the gradient passed.
 - `border` (double) **[`required`]**- Gives Width to the ContainerBorder.
@@ -199,7 +199,6 @@ class GlassmorphicSampleState extends State<GlassmorphicSample> {
 - `BoxShape` (Fixed) - This value is fixed to [`BoxFit.rectangle`].
 - `constraints` (ChatUser) - The constructor `width` and `height` arguments are combined with the `constraints` argument to set this property.
 - `margin` (double) - Empty space to surround the [decoration] and [child].
-
 
 ```dart
   GlassmorphicContainer(
@@ -214,21 +213,23 @@ class GlassmorphicSampleState extends State<GlassmorphicSample> {
     child: null),
   );
 ```
+
 ## My Socials 👩‍👦‍👦
-- *Official*
-  -   [*Github*](https://www.github.com/riticksaha)
-  -   [*Instagram*](https://www.instagram.com/theflutterfoundry/)
-  -   [*Twitter*](https://twitter.com/flutterfoundry/)
-  -   [*Youtube*](https://www.youtube.com/channel/UCH7gICVJpoZPRV6h9O6Xu4g)
-- *Personal*  
-  -   [Instagram](https://www.instagram.com/riticksaha_/) 
-  -   [Twitter](https://www.twitter.com/rsahatwt/)
+
+- _Official_
+  - [_Github_](https://www.github.com/riticksaha)
+  - [_Instagram_](https://www.instagram.com/theflutterfoundry/)
+  - [_Twitter_](https://twitter.com/flutterfoundry/)
+  - [_Youtube_](https://www.youtube.com/channel/UCH7gICVJpoZPRV6h9O6Xu4g)
+- _Personal_
+  - [Instagram](https://www.instagram.com/riticksaha_/)
+  - [Twitter](https://www.twitter.com/rsahatwt/)
 
 ## Credits 👨🏻‍💻
 
-[![Logo](https://instagram.fccu1-1.fna.fbcdn.net/v/t51.2885-19/s150x150/143695225_2940273386249796_9220350399381167555_n.jpg?_nc_ht=instagram.fccu1-1.fna.fbcdn.net&_nc_ohc=LAZn1VRl4yMAX9ny-sg&tp=1&oh=563f77bc55d3da044adefa1ee58d1ddc&oe=6051C59E "The Flutter Foundry")](https://www.instagram.com/the.flutter.foundry)<br>The Flutter Foundry 💙 <br> [Instagram](https://www.instagram.com/theflutterfoundry)
+<center><a href="url"><img src="https://raw.githubusercontent.com/RitickSaha/glassmorphism/Glassmorphism--3.0.0/images/theFlutterFoundary.jpeg"align="left" height="48" width="48" ></center><BR></a><BR><BR>
 
-
+[The Flutter Foundry 💙 - Instagram Link](https://www.instagram.com/theflutterfoundry)
 ## Found this project useful? ❤️
 
 If you found this project useful, then please consider giving it a ⭐️ on Github and sharing it with your friends via social media.
@@ -243,5 +244,5 @@ See the [glassmorphic.dart](https://github.com/RitickSaha/glassmophism/blob/mast
 
 ## Issues and feedback 💭
 
-If you have any suggestion for including a feature or if something doesn't work. 
+If you have any suggestion for including a feature or if something doesn't work.
 Feel free to open a Github [issue](https://github.com/RitickSaha/glassmophism/issues) for us to have a discussion on it.
