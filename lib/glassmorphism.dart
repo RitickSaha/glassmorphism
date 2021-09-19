@@ -435,7 +435,6 @@ class _GradientPainter extends CustomPainter {
         this.radius = radius,
         this.gradient = gradient;
   final Paint paintObject = Paint();
-  final Paint paintObject2 = Paint();
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -454,8 +453,7 @@ class _GradientPainter extends CustomPainter {
         Path.combine(
             PathOperation.difference,
             outerRectPath,
-            Path.combine(
-                PathOperation.intersect, outerRectPath, innerRectPath2)),
+            innerRectPath2),
         paintObject);
   }
 
