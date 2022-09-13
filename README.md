@@ -1,5 +1,5 @@
 <p align="center">
-  <h1 align="center" style="font-size: 48px;"> Glassmorphic Container 🔨</h1>
+  <h1 align="center" style="font-size: 48px;"> Glassmorphic Container ⭐️</h1>
   </p>
 
 A Flutter package for creating Glassmorphic UI designs in an easy and simple manner!
