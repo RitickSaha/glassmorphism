@@ -261,8 +261,8 @@ class GlassmorphicContainer extends StatelessWidget {
   /// see [Decoration.padding].
   final EdgeInsetsGeometry? padding;
 
-  final double width;
-  final double height;
+  final double? width;
+  final double? height;
 
   /// Empty space to surround the [decoration] and [child].
   final EdgeInsetsGeometry? margin;
@@ -302,8 +302,8 @@ class GlassmorphicContainer extends StatelessWidget {
     BoxConstraints? constraints,
     this.margin,
     this.transform,
-    required this.width,
-    required this.height,
+    this.width,
+    this.height,
     required this.borderRadius,
     required this.linearGradient,
     required this.border,
@@ -345,26 +345,29 @@ class GlassmorphicContainer extends StatelessWidget {
       child: Stack(
         alignment: alignment ?? Alignment.topLeft,
         children: [
-          ClipRRect(
-            clipBehavior: Clip.hardEdge,
-            borderRadius: BorderRadius.circular(borderRadius),
-            child: BackdropFilter(
-              filter: ImageFilter.blur(sigmaX: blur, sigmaY: blur * 2),
-              child: Container(
-                alignment: alignment ?? Alignment.topLeft,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(borderRadius),
-                  gradient: linearGradient,
+          Positioned.fill(
+            child: ClipRRect(
+              clipBehavior: Clip.hardEdge,
+              borderRadius: BorderRadius.circular(borderRadius),
+              child: BackdropFilter(
+                filter: ImageFilter.blur(sigmaX: blur, sigmaY: blur * 2),
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(borderRadius),
+                    gradient: linearGradient,
+                  ),
                 ),
               ),
             ),
           ),
-          GlassmorphicBorder(
-            strokeWidth: border,
-            radius: borderRadius,
-            width: width,
-            height: height,
-            gradient: borderGradient,
+          Positioned.fill(
+            child: GlassmorphicBorder(
+              strokeWidth: border,
+              radius: borderRadius,
+              width: width,
+              height: height,
+              gradient: borderGradient,
+            ),
           ),
           ClipRRect(
             clipBehavior: Clip.hardEdge,
@@ -450,10 +453,7 @@ class _GradientPainter extends CustomPainter {
     Path outerRectPath = Path()..addRRect(outerRect);
     Path innerRectPath2 = Path()..addRRect(innerRect2);
     canvas.drawPath(
-        Path.combine(
-            PathOperation.difference,
-            outerRectPath,
-            innerRectPath2),
+        Path.combine(PathOperation.difference, outerRectPath, innerRectPath2),
         paintObject);
   }
 
