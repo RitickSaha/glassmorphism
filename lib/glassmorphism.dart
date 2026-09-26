@@ -1,462 +1,618 @@
-library glassmorphism;
+/// Glassmorphic (frosted glass) containers for Flutter.
+///
+/// * [GlassmorphicContainer] – a frosted glass box that can have a fixed size
+///   or size itself to its child.
+/// * [GlassmorphicFlexContainer] – the same glass effect wrapped in an
+///   [Expanded], for use directly inside a [Row], [Column] or [Flex].
+/// * [GlassmorphicBorder] – just the gradient border, for custom layouts.
+library;
 
-import 'dart:ui';
+import 'dart:math' as math;
+import 'dart:ui' show ImageFilter;
 
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
-/// This Package is created by [Ritick Saha] [The flutter foundry]
-/// My [social] handles 🤵🤵🤵:
-/// [Github]            https://www.github.com/riticksaha
-/// [Instagram]         https://www.instagram.com/riticksaha_/
-/// [Twitter]           https://www.twitter.com/rsahatwt/
-/// [Instagram-official] https://www.instagram.com/the.flutter.foundry/
-/// [Twitter-official]   https://twitter.com/flutterfoundry/
-/// [Youtube-official]   https://www.youtube.com/channel/UCH7gICVJpoZPRV6h9O6Xu4g
-
-class GlassmorphicFlexContainer extends StatelessWidget {
-  /// Creates a widget with Glassmorphic Trend that combines [CustomPainter] class,[BackdropFilter], [Expanded], and [Flex].
-  ///
-  ///
-  /// The [color] and [decoration] arguments cannot be supplied, since
-  /// in glassmorphic container designs [BoxDecoration] is alredy being configured to you
-  /// You can easily customize [borderGradient] and [linearGradient] like:
-  ///! [Note] If you want to create a container with fixed size or dimentions like `height` , 'width','Size',
-  ///! please user use [GlassmorphismContainer]
-  ///* [GlassmorphicFlexContainer] is only of UIs where you need flexibility and responsiveness [Expample link](https://github.com/RitickSaha/glassmorphism/tree/master/example/lib)
-  /// ```dart
-  /// GlassmorphicFlexContainer(
-  ///   flex:2
-  ///   borderRadius: 20,
-  ///   blur: 3,
-  ///   alignment: Alignment.bottomCenter,
-  ///   border: 2,
-  ///   linearGradient: LinearGradient(
-  ///     begin: Alignment.topLeft,
-  ///     end: Alignment.bottomRight,
-  ///     colors: [
-  ///         Color(0xFFffffff).withOpacity(0.5),
-  ///         Colors.red.withOpacity(0.2),
-  ///       ],
-  ///     stops: [
-  ///       0.1,
-  ///       1,
-  ///     ]),
-  ///   borderGradient: LinearGradient(
-  ///     begin: Alignment.topLeft,
-  ///     end: Alignment.bottomRight,
-  ///     colors: [
-  ///         Color(0xFFffffff).withOpacity(0.5),
-  ///         Colors.red.withOpacity(0.5),
-  ///       ],
-  ///     ),
-  ///   child: SizedBox()
-  /// ),
-  /// ```
-
-  final Key? key;
-
-  /// Align the [child] within the container.
-  ///
-  /// If non-null, the container will expand to fill its parent and position its
-  /// child within itself according to the given value. If the incoming
-  /// constraints are unbounded, then the child will be shrink-wrapped instead.
-  ///
-  /// Ignored if [child] is null.
-  ///
-  /// See also:
-  ///
-  ///  * [Alignment], a class with convenient constants typically used to
-  ///    specify an [AlignmentGeometry].
-  ///  * [AlignmentDirectional], like [Alignment] for specifying alignments
-  ///    relative to text direction.
-  final AlignmentGeometry? alignment;
-
-  /// Empty space to inscribe inside the [decoration]. The [child], if any, is
-  /// placed inside this padding.
-  ///
-  /// This padding is in addition to any padding inherent in the [decoration];
-  /// see [Decoration.padding].
-  final EdgeInsetsGeometry? padding;
-
-  final int? flex;
-
-  /// Empty space to surround the [decoration] and [child].
-  final EdgeInsetsGeometry? margin;
-
-  /// The transformation matrix to apply before painting the container.
-  /// it is similar to all the containers
-  final Matrix4? transform;
-
-  /// The [child] contained by the container.
-  ///
-  /// If null, and if the [constraints] are unbounded or also null, the
-  /// container will expand to fill all available space in its parent, unless
-  /// the parent provides unbounded constraints, in which case the container
-  /// will attempt to be as small as possible.
-  ///
-  /// {@macro flutter.widgets.ProxyWidget.child
-  final Widget? child;
-
-  /// All the bellow parametrs are used to design the Glassmorphic effects and this effect is used to
-  /// improve the performance ans scalablility as per the requirement.
-  /// with good response i will try to [add more featurs and resolve the issues] on my github regarding this package
-  /// Thanks for the support... even you can contribute to this project on github.
-  final double borderRadius;
-  final BoxShape shape;
-  final BoxConstraints? constraints;
-  final double border;
-  final double blur;
-  final LinearGradient linearGradient;
-  final LinearGradient borderGradient;
-  GlassmorphicFlexContainer(
-      {this.key,
-      this.child,
-      this.alignment,
-      this.padding,
-      this.shape = BoxShape.rectangle,
-      this.margin,
-      this.transform,
-      required this.borderRadius,
-      required this.linearGradient,
-      required this.border,
-      required this.blur,
-      required this.borderGradient,
-      this.constraints,
-      this.flex = 1})
-      : assert(margin == null || margin.isNonNegative),
-        assert(padding == null || padding.isNonNegative),
-        assert(
-          flex! >= 1,
-          'Flex value can be less than 1 : $flex. Please Provide a flex value > 1',
-        ),
-        assert(constraints == null || constraints.debugAssertIsValid()),
-        super(key: key);
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<AlignmentGeometry>(
-        'alignment', alignment,
-        showName: false, defaultValue: null));
-    properties.add(DiagnosticsProperty<EdgeInsetsGeometry>('padding', padding,
-        defaultValue: null));
-    properties.add(DiagnosticsProperty<BoxConstraints>(
-        'constraints', constraints,
-        defaultValue: null));
-    properties.add(DiagnosticsProperty<EdgeInsetsGeometry>('margin', margin,
-        defaultValue: null));
-    properties.add(ObjectFlagProperty<Matrix4>.has('transform', transform));
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Expanded(
-      flex: flex!,
-      child: Container(
-        key: key,
-        alignment: alignment,
-        padding: padding,
-        constraints: BoxConstraints.tightForFinite(),
-        transform: transform,
-        child: Stack(
-          children: [
-            ClipRRect(
-              clipBehavior: Clip.hardEdge,
-              borderRadius: BorderRadius.circular(borderRadius),
-              child: BackdropFilter(
-                filter: ImageFilter.blur(sigmaX: blur, sigmaY: blur * 2),
-                child: Container(
-                  alignment: alignment ?? Alignment.topLeft,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(borderRadius),
-                    gradient: linearGradient,
-                  ),
-                ),
-              ),
-            ),
-            GlassmorphicBorder(
-              strokeWidth: border,
-              radius: borderRadius,
-              gradient: borderGradient,
-            ),
-            ClipRRect(
-              clipBehavior: Clip.hardEdge,
-              borderRadius: BorderRadius.circular(borderRadius),
-              child: Container(
-                child: child,
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
+/// A container with a frosted glass (glassmorphism) look: a blurred backdrop,
+/// a translucent gradient fill and a gradient border.
+///
+/// When [width] and [height] are omitted the container sizes itself to its
+/// [child] (plus [padding]), just like a regular [Container]. When [alignment]
+/// is set, the container expands to fill its parent, again like [Container].
+///
+/// ```dart
+/// GlassmorphicContainer(
+///   width: 250,
+///   height: 250,
+///   borderRadius: 20,
+///   blur: 10,
+///   border: 2,
+///   alignment: Alignment.center,
+///   linearGradient: const LinearGradient(
+///     begin: Alignment.topLeft,
+///     end: Alignment.bottomRight,
+///     colors: [Color(0x33FFFFFF), Color(0x0DFFFFFF)],
+///   ),
+///   borderGradient: const LinearGradient(
+///     begin: Alignment.topLeft,
+///     end: Alignment.bottomRight,
+///     colors: [Color(0x80FFFFFF), Color(0x80FFFFFF)],
+///   ),
+///   child: const Text('Glass'),
+/// )
+/// ```
+///
+/// The blur is applied with a [BackdropFilter], so it only affects what is
+/// painted *behind* the container by Flutter. Platform views (for example
+/// Google Maps or web views on iOS) may not be blurred, depending on the
+/// platform and rendering backend.
 class GlassmorphicContainer extends StatelessWidget {
-  /// Creates a widget with Glassmorphic Trend that combines [CustomPainter] class, [ClipRect],[BackdropFilter], and [BlurFilter].
+  /// Creates a glassmorphic container.
   ///
-  ///
-  /// The [color] and [decoration] arguments cannot be supplied, since
-  /// in glassmorphic container designs [BoxDecoration] is alredy being configured to you
-  /// You can easily customize [borderGradient] and [linearGradient] like:
-  ///! [Note] If you want to create a container with Dynamic dimentions like `height` , 'width','Size',
-  ///! please user use [GlassmorphismFlexContainer]
-  ///* [GlassmorphicContainer] is only of UIs where you dont use flexibility and responsiveness [Expample link](https://github.com/RitickSaha/glassmorphism/tree/master/example/lib)
-
-  /// ```dart
-  /// GlassmorphicContainer(
-  /// width: 250,
-  /// height: 250,
-  ///  borderRadius: 20,
-  ///  blur: 3,
-  ///  alignment: Alignment.bottomCenter,
-  ///  border: 2,
-  ///  linearGradient: LinearGradient(
-  ///  begin: Alignment.topLeft,
-  ///      end: Alignment.bottomRight,
-  ///      colors: [
-  ///        Color(0xFFffffff).withOpacity(0.5),
-  ///        Colors.red.withOpacity(0.2),
-  ///      ],
-  ///      stops: [
-  ///        0.1,
-  ///        1,
-  ///      ]),
-  ///  borderGradient: LinearGradient(
-  ///    begin: Alignment.topLeft,
-  ///    end: Alignment.bottomRight,
-  ///    colors: [
-  ///      Color(0xFFffffff).withOpacity(0.5),
-  ///      Colors.red.withOpacity(0.5),
-  ///    ],
-  ///  ),
-  ///  child: null
-  /// ),
-  /// ```
-
-  final Key? key;
-
-  /// Align the [child] within the container.
-  ///
-  /// If non-null, the container will expand to fill its parent and position its
-  /// child within itself according to the given value. If the incoming
-  /// constraints are unbounded, then the child will be shrink-wrapped instead.
-  ///
-  /// Ignored if [child] is null.
-  ///
-  /// See also:
-  ///
-  ///  * [Alignment], a class with convenient constants typically used to
-  ///    specify an [AlignmentGeometry].
-  ///  * [AlignmentDirectional], like [Alignment] for specifying alignments
-  ///    relative to text direction.
-  final AlignmentGeometry? alignment;
-
-  /// Empty space to inscribe inside the [decoration]. The [child], if any, is
-  /// placed inside this padding.
-  ///
-  /// This padding is in addition to any padding inherent in the [decoration];
-  /// see [Decoration.padding].
-  final EdgeInsetsGeometry? padding;
-
-  final double width;
-  final double height;
-
-  /// Empty space to surround the [decoration] and [child].
-  final EdgeInsetsGeometry? margin;
-
-  /// The transformation matrix to apply before painting the container.
-  /// it is similar to all the containers
-  final Matrix4? transform;
-
-  /// The [child] contained by the container.
-  ///
-  /// If null, and if the [constraints] are unbounded or also null, the
-  /// container will expand to fill all available space in its parent, unless
-  /// the parent provides unbounded constraints, in which case the container
-  /// will attempt to be as small as possible.
-  ///
-  /// {@macro flutter.widgets.ProxyWidget.child
-  final Widget? child;
-
-  /// All the bellow parametrs are used to design the Glassmorphic effects and this effect is used to
-  /// improve the performance ans scalablility as per the requirement.
-  /// with good response i will try to [add more featurs and resolve the issues] on my github regarding this package
-  /// Thanks for the support... even you can contribute to this project on github.
-  final double borderRadius;
-  final BoxShape shape;
-  final BoxConstraints? constraints;
-
-  final double border;
-  final double blur;
-  final LinearGradient linearGradient;
-  final LinearGradient borderGradient;
-  GlassmorphicContainer({
-    this.key,
-    this.child,
-    this.alignment,
-    this.padding,
-    this.shape = BoxShape.rectangle,
-    BoxConstraints? constraints,
-    this.margin,
-    this.transform,
-    required this.width,
-    required this.height,
+  /// [borderRadius], [border] and [blur] must be non-negative.
+  const GlassmorphicContainer({
+    super.key,
+    this.width,
+    this.height,
     required this.borderRadius,
     required this.linearGradient,
     required this.border,
     required this.blur,
     required this.borderGradient,
-  })  : assert(margin == null || margin.isNonNegative),
-        assert(padding == null || padding.isNonNegative),
-        assert(constraints == null || constraints.debugAssertIsValid()),
-        constraints = constraints?.tighten(width: width, height: height) ??
-            BoxConstraints.tightFor(width: width, height: height),
-        super(key: key);
+    this.child,
+    this.alignment,
+    this.padding,
+    this.margin,
+    this.constraints,
+    this.transform,
+    this.shape = BoxShape.rectangle,
+    this.boxShadow,
+    this.clipBehavior = Clip.antiAlias,
+  })  : assert(borderRadius >= 0, 'borderRadius must be non-negative'),
+        assert(border >= 0, 'border must be non-negative'),
+        assert(blur >= 0, 'blur must be non-negative'),
+        assert(width == null || width >= 0, 'width must be non-negative'),
+        assert(height == null || height >= 0, 'height must be non-negative');
+
+  /// The fixed width of the container, including [padding].
+  ///
+  /// If null, the width is determined by the [child] and the incoming
+  /// constraints.
+  final double? width;
+
+  /// The fixed height of the container, including [padding].
+  ///
+  /// If null, the height is determined by the [child] and the incoming
+  /// constraints.
+  final double? height;
+
+  /// The radius of the corners. Ignored when [shape] is [BoxShape.circle].
+  final double borderRadius;
+
+  /// The gradient used to fill the glass. Use translucent colors so the
+  /// blurred backdrop shows through.
+  ///
+  /// Despite its name, any [Gradient] (linear, radial or sweep) is accepted.
+  final Gradient linearGradient;
+
+  /// The width of the gradient border. Use `0` for no border.
+  ///
+  /// The border is drawn inside the bounds of the container.
+  final double border;
+
+  /// The blur sigma applied to what is behind the container, in logical
+  /// pixels. Use `0` to disable the blur.
+  final double blur;
+
+  /// The gradient used to paint the border.
+  final Gradient borderGradient;
+
+  /// The widget below this widget in the tree, clipped to the glass shape.
+  final Widget? child;
+
+  /// Aligns the [child] within the container.
+  ///
+  /// If non-null, the container expands to fill its parent (within any fixed
+  /// [width] or [height]) and positions its child within itself according to
+  /// the given value. If the incoming constraints are unbounded, the child is
+  /// shrink-wrapped instead.
+  final AlignmentGeometry? alignment;
+
+  /// Empty space inside the glass, around the [child].
+  final EdgeInsetsGeometry? padding;
+
+  /// Empty space around the glass.
+  final EdgeInsetsGeometry? margin;
+
+  /// Additional constraints to apply to the glass. [width] and [height]
+  /// tighten these constraints.
+  final BoxConstraints? constraints;
+
+  /// The transformation matrix to apply before painting the container.
+  final Matrix4? transform;
+
+  /// The shape of the glass: a (rounded) rectangle or a circle.
+  ///
+  /// A circle is centered in the container and has a diameter equal to the
+  /// shortest side, matching [BoxDecoration.shape].
+  final BoxShape shape;
+
+  /// Shadows cast by the glass.
+  ///
+  /// Shadows are only painted *outside* the glass shape (like CSS
+  /// `box-shadow`), so they do not darken the translucent fill.
+  final List<BoxShadow>? boxShadow;
+
+  /// How the [child] is clipped to the glass shape.
+  ///
+  /// The blurred backdrop is always clipped (with anti-aliasing), otherwise it
+  /// would blur the whole screen. Use [Clip.none] to let the child overflow
+  /// the glass.
+  final Clip clipBehavior;
+
+  @override
+  Widget build(BuildContext context) {
+    final TextDirection? textDirection = Directionality.maybeOf(context);
+    final _GlassShape glassShape =
+        _GlassShape(shape: shape, borderRadius: borderRadius);
+
+    Widget glass = Stack(
+      // Directional alignment needs a Directionality ancestor; fall back to
+      // top-left so the widget also works without one.
+      alignment: textDirection == null
+          ? Alignment.topLeft
+          : AlignmentDirectional.topStart,
+      clipBehavior: Clip.none,
+      children: <Widget>[
+        Positioned.fill(
+          child: _GlassBackground(
+            glassShape: glassShape,
+            blur: blur,
+            gradient: linearGradient,
+          ),
+        ),
+        if (border > 0)
+          Positioned.fill(
+            child: CustomPaint(
+              painter: _BorderPainter(
+                glassShape: glassShape,
+                strokeWidth: border,
+                gradient: borderGradient,
+                textDirection: textDirection,
+              ),
+            ),
+          ),
+        _clip(
+          glassShape,
+          clipBehavior,
+          Container(alignment: alignment, padding: padding, child: child),
+        ),
+      ],
+    );
+
+    final List<BoxShadow>? shadows = boxShadow;
+    if (shadows != null && shadows.isNotEmpty) {
+      glass = CustomPaint(
+        painter: _ShadowPainter(glassShape: glassShape, shadows: shadows),
+        child: glass,
+      );
+    }
+
+    return Container(
+      width: width,
+      height: height,
+      constraints: constraints,
+      margin: margin,
+      transform: transform,
+      child: glass,
+    );
+  }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<AlignmentGeometry>(
-        'alignment', alignment,
-        showName: false, defaultValue: null));
-    properties.add(DiagnosticsProperty<EdgeInsetsGeometry>('padding', padding,
-        defaultValue: null));
-    properties.add(DiagnosticsProperty<BoxConstraints>(
-        'constraints', constraints,
-        defaultValue: null));
-    properties.add(DiagnosticsProperty<EdgeInsetsGeometry>('margin', margin,
-        defaultValue: null));
-    properties.add(ObjectFlagProperty<Matrix4>.has('transform', transform));
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      key: key,
-      width: width,
-      margin: margin,
-      alignment: alignment,
-      constraints: constraints,
-      height: height,
-      transform: transform,
-      child: Stack(
-        alignment: alignment ?? Alignment.topLeft,
-        children: [
-          ClipRRect(
-            clipBehavior: Clip.hardEdge,
-            borderRadius: BorderRadius.circular(borderRadius),
-            child: BackdropFilter(
-              filter: ImageFilter.blur(sigmaX: blur, sigmaY: blur * 2),
-              child: Container(
-                alignment: alignment ?? Alignment.topLeft,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(borderRadius),
-                  gradient: linearGradient,
-                ),
-              ),
-            ),
-          ),
-          GlassmorphicBorder(
-            strokeWidth: border,
-            radius: borderRadius,
-            width: width,
-            height: height,
-            gradient: borderGradient,
-          ),
-          ClipRRect(
-            clipBehavior: Clip.hardEdge,
-            borderRadius: BorderRadius.circular(borderRadius),
-            child: Container(
-              child: child,
-              alignment: alignment,
-            ),
-          ),
-        ],
-      ),
-    );
+    properties
+      ..add(DoubleProperty('width', width, defaultValue: null))
+      ..add(DoubleProperty('height', height, defaultValue: null))
+      ..add(DoubleProperty('borderRadius', borderRadius))
+      ..add(DoubleProperty('border', border))
+      ..add(DoubleProperty('blur', blur))
+      ..add(DiagnosticsProperty<Gradient>('linearGradient', linearGradient))
+      ..add(DiagnosticsProperty<Gradient>('borderGradient', borderGradient))
+      ..add(DiagnosticsProperty<AlignmentGeometry>('alignment', alignment,
+          showName: false, defaultValue: null))
+      ..add(DiagnosticsProperty<EdgeInsetsGeometry>('padding', padding,
+          defaultValue: null))
+      ..add(DiagnosticsProperty<EdgeInsetsGeometry>('margin', margin,
+          defaultValue: null))
+      ..add(DiagnosticsProperty<BoxConstraints>('constraints', constraints,
+          defaultValue: null))
+      ..add(ObjectFlagProperty<Matrix4>.has('transform', transform))
+      ..add(EnumProperty<BoxShape>('shape', shape,
+          defaultValue: BoxShape.rectangle))
+      ..add(IterableProperty<BoxShadow>('boxShadow', boxShadow,
+          defaultValue: null))
+      ..add(EnumProperty<Clip>('clipBehavior', clipBehavior,
+          defaultValue: Clip.antiAlias));
   }
 }
 
-/// This class is responsible for creating a [gradient Border] around
-/// the GlassMorphic Container.
-/// You must have to change your [flutter channel] to Dev version if
-/// your want to play with it on the web. currently flutter dosen't
-/// support custom painter in
-///                [Flutter web]                       [Flutter Apps]
-///   [master] -- [  Supported   ✔ ]        :        [  Supported   ✔ ]
-///    [dev]   -- [  Supported   ✔ ]        :        [  Supported   ✔ ]
-///   [beta]   -- [  Supported   ✔ ]        :        [  Supported   ✔ ]
-///  [stable]  -- [  Supported   ✔ ]        :        [  Supported   ✔ ]
+/// A [GlassmorphicContainer] wrapped in an [Expanded], so it fills its share
+/// of the main axis of a [Row], [Column] or [Flex] and the full cross axis.
+///
+/// This widget must be a direct child of a [Flex] widget. To make glass that
+/// sizes itself to its child, use [GlassmorphicContainer] without a `width`
+/// or `height` instead.
+///
+/// ```dart
+/// Column(
+///   children: [
+///     GlassmorphicFlexContainer(
+///       flex: 2,
+///       borderRadius: 20,
+///       blur: 10,
+///       border: 2,
+///       linearGradient: const LinearGradient(
+///         colors: [Color(0x33FFFFFF), Color(0x0DFFFFFF)],
+///       ),
+///       borderGradient: const LinearGradient(
+///         colors: [Color(0x80FFFFFF), Color(0x80FFFFFF)],
+///       ),
+///       child: const Text('Glass'),
+///     ),
+///   ],
+/// )
+/// ```
+class GlassmorphicFlexContainer extends StatelessWidget {
+  /// Creates a glassmorphic container that expands inside a [Flex].
+  ///
+  /// [flex] must be at least 1. [borderRadius], [border] and [blur] must be
+  /// non-negative.
+  const GlassmorphicFlexContainer({
+    super.key,
+    this.flex = 1,
+    required this.borderRadius,
+    required this.linearGradient,
+    required this.border,
+    required this.blur,
+    required this.borderGradient,
+    this.child,
+    this.alignment,
+    this.padding,
+    this.margin,
+    this.constraints,
+    this.transform,
+    this.shape = BoxShape.rectangle,
+    this.boxShadow,
+    this.clipBehavior = Clip.antiAlias,
+  })  : assert(flex >= 1, 'flex must be at least 1, got $flex'),
+        assert(borderRadius >= 0, 'borderRadius must be non-negative'),
+        assert(border >= 0, 'border must be non-negative'),
+        assert(blur >= 0, 'blur must be non-negative');
 
+  /// The flex factor passed to the [Expanded] wrapping the glass.
+  final int flex;
+
+  /// See [GlassmorphicContainer.borderRadius].
+  final double borderRadius;
+
+  /// See [GlassmorphicContainer.linearGradient].
+  final Gradient linearGradient;
+
+  /// See [GlassmorphicContainer.border].
+  final double border;
+
+  /// See [GlassmorphicContainer.blur].
+  final double blur;
+
+  /// See [GlassmorphicContainer.borderGradient].
+  final Gradient borderGradient;
+
+  /// See [GlassmorphicContainer.child].
+  final Widget? child;
+
+  /// See [GlassmorphicContainer.alignment].
+  final AlignmentGeometry? alignment;
+
+  /// See [GlassmorphicContainer.padding].
+  final EdgeInsetsGeometry? padding;
+
+  /// See [GlassmorphicContainer.margin].
+  final EdgeInsetsGeometry? margin;
+
+  /// Constraints for the glass. Defaults to filling all the space the
+  /// [Expanded] provides.
+  final BoxConstraints? constraints;
+
+  /// See [GlassmorphicContainer.transform].
+  final Matrix4? transform;
+
+  /// See [GlassmorphicContainer.shape].
+  final BoxShape shape;
+
+  /// See [GlassmorphicContainer.boxShadow].
+  final List<BoxShadow>? boxShadow;
+
+  /// See [GlassmorphicContainer.clipBehavior].
+  final Clip clipBehavior;
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      flex: flex,
+      child: GlassmorphicContainer(
+        borderRadius: borderRadius,
+        linearGradient: linearGradient,
+        border: border,
+        blur: blur,
+        borderGradient: borderGradient,
+        alignment: alignment,
+        padding: padding,
+        margin: margin,
+        constraints: constraints ?? const BoxConstraints.expand(),
+        transform: transform,
+        shape: shape,
+        boxShadow: boxShadow,
+        clipBehavior: clipBehavior,
+        child: child,
+      ),
+    );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(IntProperty('flex', flex))
+      ..add(DoubleProperty('borderRadius', borderRadius))
+      ..add(DoubleProperty('border', border))
+      ..add(DoubleProperty('blur', blur))
+      ..add(DiagnosticsProperty<AlignmentGeometry>('alignment', alignment,
+          showName: false, defaultValue: null))
+      ..add(DiagnosticsProperty<EdgeInsetsGeometry>('padding', padding,
+          defaultValue: null))
+      ..add(DiagnosticsProperty<EdgeInsetsGeometry>('margin', margin,
+          defaultValue: null))
+      ..add(EnumProperty<BoxShape>('shape', shape,
+          defaultValue: BoxShape.rectangle));
+  }
+}
+
+/// Paints a gradient border, as used by [GlassmorphicContainer].
+///
+/// Without [width] and [height] it expands to fill its parent, like an empty
+/// [Container].
 class GlassmorphicBorder extends StatelessWidget {
-  final _GradientPainter _painter;
-  final double _radius;
-  final width;
-  final height;
-  GlassmorphicBorder({
-    required double strokeWidth,
-    required double radius,
-    required Gradient gradient,
-    this.height,
+  /// Creates a gradient border.
+  ///
+  /// [strokeWidth] and [radius] must be non-negative.
+  const GlassmorphicBorder({
+    super.key,
+    required this.strokeWidth,
+    required this.radius,
+    required this.gradient,
     this.width,
-  })  : this._painter = _GradientPainter(
-            strokeWidth: strokeWidth, radius: radius, gradient: gradient),
-        this._radius = radius;
+    this.height,
+    this.shape = BoxShape.rectangle,
+  })  : assert(strokeWidth >= 0, 'strokeWidth must be non-negative'),
+        assert(radius >= 0, 'radius must be non-negative');
+
+  /// The width of the border, drawn inside the bounds of this widget.
+  final double strokeWidth;
+
+  /// The corner radius. Ignored when [shape] is [BoxShape.circle].
+  final double radius;
+
+  /// The gradient used to paint the border.
+  final Gradient gradient;
+
+  /// The fixed width of the border, if any.
+  final double? width;
+
+  /// The fixed height of the border, if any.
+  final double? height;
+
+  /// The shape of the border.
+  final BoxShape shape;
 
   @override
   Widget build(BuildContext context) {
     return CustomPaint(
-      painter: _painter,
-      size: MediaQuery.of(context).size,
-      child: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(_radius)),
-        ),
-        width: width,
-        height: height,
+      painter: _BorderPainter(
+        glassShape: _GlassShape(shape: shape, borderRadius: radius),
+        strokeWidth: strokeWidth,
+        gradient: gradient,
+        textDirection: Directionality.maybeOf(context),
       ),
+      // Unlike SizedBox, an empty Container fills bounded constraints and
+      // collapses under unbounded ones, matching the previous behavior.
+      // ignore: sized_box_for_whitespace
+      child: Container(width: width, height: height),
     );
   }
 }
 
-class _GradientPainter extends CustomPainter {
-  final double radius;
-  final double strokeWidth;
+/// Describes the outline of the glass so the clip, border and shadow agree.
+@immutable
+class _GlassShape {
+  const _GlassShape({required this.shape, required this.borderRadius});
+
+  final BoxShape shape;
+  final double borderRadius;
+
+  /// The outline of the glass in [rect], grown by [inflate] logical pixels
+  /// (or shrunk, if negative).
+  Path outline(Rect rect, {double inflate = 0}) {
+    switch (shape) {
+      case BoxShape.circle:
+        return Path()
+          ..addOval(Rect.fromCircle(
+            center: rect.center,
+            radius: math.max(0, rect.shortestSide / 2 + inflate),
+          ));
+      case BoxShape.rectangle:
+        // Never shrink past the center, which would invert the rect.
+        final double delta = math.max(inflate, -rect.shortestSide / 2);
+        return Path()..addRRect(_rrect(rect).inflate(delta));
+    }
+  }
+
+  RRect _rrect(Rect rect) =>
+      RRect.fromRectAndRadius(rect, Radius.circular(borderRadius));
+
+  @override
+  bool operator ==(Object other) =>
+      other is _GlassShape &&
+      other.shape == shape &&
+      other.borderRadius == borderRadius;
+
+  @override
+  int get hashCode => Object.hash(shape, borderRadius);
+}
+
+class _GlassClipper extends CustomClipper<Path> {
+  const _GlassClipper(this.glassShape);
+
+  final _GlassShape glassShape;
+
+  @override
+  Path getClip(Size size) => glassShape.outline(Offset.zero & size);
+
+  @override
+  bool shouldReclip(_GlassClipper oldClipper) =>
+      oldClipper.glassShape != glassShape;
+}
+
+Widget _clip(_GlassShape glassShape, Clip clipBehavior, Widget child) {
+  if (clipBehavior == Clip.none) {
+    return child;
+  }
+  if (glassShape.shape == BoxShape.rectangle) {
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(glassShape.borderRadius),
+      clipBehavior: clipBehavior,
+      child: child,
+    );
+  }
+  return ClipPath(
+    clipper: _GlassClipper(glassShape),
+    clipBehavior: clipBehavior,
+    child: child,
+  );
+}
+
+/// The blurred, gradient-filled glass surface.
+class _GlassBackground extends StatelessWidget {
+  const _GlassBackground({
+    required this.glassShape,
+    required this.blur,
+    required this.gradient,
+  });
+
+  final _GlassShape glassShape;
+  final double blur;
   final Gradient gradient;
 
-  _GradientPainter(
-      {required double strokeWidth,
-      required double radius,
-      required Gradient gradient})
-      : this.strokeWidth = strokeWidth,
-        this.radius = radius,
-        this.gradient = gradient;
-  final Paint paintObject = Paint();
+  @override
+  Widget build(BuildContext context) {
+    Widget fill = DecoratedBox(
+      decoration: BoxDecoration(
+        gradient: gradient,
+        shape: glassShape.shape,
+        borderRadius: glassShape.shape == BoxShape.rectangle
+            ? BorderRadius.circular(glassShape.borderRadius)
+            : null,
+      ),
+    );
+    if (blur > 0) {
+      fill = BackdropFilter(
+        filter: ImageFilter.blur(sigmaX: blur, sigmaY: blur),
+        child: fill,
+      );
+    }
+    // The backdrop must always be clipped, or it would blur the whole screen.
+    return _clip(glassShape, Clip.antiAlias, fill);
+  }
+}
+
+class _BorderPainter extends CustomPainter {
+  _BorderPainter({
+    required this.glassShape,
+    required this.strokeWidth,
+    required this.gradient,
+    required this.textDirection,
+  });
+
+  final _GlassShape glassShape;
+  final double strokeWidth;
+  final Gradient gradient;
+  final TextDirection? textDirection;
 
   @override
   void paint(Canvas canvas, Size size) {
-    RRect innerRect2 = RRect.fromRectAndRadius(
-        Rect.fromLTRB(strokeWidth, strokeWidth, size.width - (strokeWidth),
-            size.height - (strokeWidth)),
-        Radius.circular(radius - strokeWidth));
-
-    RRect outerRect = RRect.fromRectAndRadius(
-        Rect.fromLTRB(0, 0, size.width, size.height), Radius.circular(radius));
-    paintObject.shader = gradient.createShader(Offset.zero & size);
-
-    Path outerRectPath = Path()..addRRect(outerRect);
-    Path innerRectPath2 = Path()..addRRect(innerRect2);
-    canvas.drawPath(
-        Path.combine(
-            PathOperation.difference,
-            outerRectPath,
-            innerRectPath2),
-        paintObject);
+    if (strokeWidth <= 0 || size.isEmpty) {
+      return;
+    }
+    final Rect rect = Offset.zero & size;
+    // A border wider than the shape would otherwise produce a negative inner
+    // rect or radius and trip assertions in dart:ui.
+    final double stroke = math.min(strokeWidth, size.shortestSide / 2);
+    final Paint paint = Paint()
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = stroke
+      ..shader = gradient.createShader(rect, textDirection: textDirection);
+    canvas.drawPath(glassShape.outline(rect, inflate: -stroke / 2), paint);
   }
 
   @override
-  bool shouldRepaint(CustomPainter oldDelegate) => true;
+  bool shouldRepaint(_BorderPainter oldDelegate) =>
+      oldDelegate.glassShape != glassShape ||
+      oldDelegate.strokeWidth != strokeWidth ||
+      oldDelegate.gradient != gradient ||
+      oldDelegate.textDirection != textDirection;
+}
+
+class _ShadowPainter extends CustomPainter {
+  _ShadowPainter({required this.glassShape, required this.shadows});
+
+  final _GlassShape glassShape;
+  final List<BoxShadow> shadows;
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final Rect rect = Offset.zero & size;
+    double extent = 0;
+    for (final BoxShadow shadow in shadows) {
+      extent = math.max(
+        extent,
+        shadow.offset.distance +
+            shadow.spreadRadius.abs() +
+            shadow.blurRadius * 2,
+      );
+    }
+    // Clip out the glass itself so the shadow does not show through the
+    // translucent fill.
+    final Path outside = Path()
+      ..fillType = PathFillType.evenOdd
+      ..addRect(rect.inflate(extent + 1))
+      ..addPath(glassShape.outline(rect), Offset.zero);
+    canvas
+      ..save()
+      ..clipPath(outside);
+    for (final BoxShadow shadow in shadows) {
+      canvas.drawPath(
+        glassShape.outline(
+          rect.shift(shadow.offset),
+          inflate: shadow.spreadRadius,
+        ),
+        shadow.toPaint(),
+      );
+    }
+    canvas.restore();
+  }
+
+  @override
+  bool shouldRepaint(_ShadowPainter oldDelegate) =>
+      oldDelegate.glassShape != glassShape ||
+      !listEquals(oldDelegate.shadows, shadows);
 }
