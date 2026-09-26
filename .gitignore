@@ -72,3 +72,6 @@ build/
 !**/ios/**/default.mode2v3
 !**/ios/**/default.pbxuser
 !**/ios/**/default.perspectivev3
+
+# Libraries should not commit lock files.
+pubspec.lock

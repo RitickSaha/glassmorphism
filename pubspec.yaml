@@ -1,14 +1,26 @@
 name: glassmorphism
-description: A Flutter package for implimentation of Glassmorphic UI easily.
-version: 3.0.0
-homepage: "https://www.instagram.com/the.flutter.foundry/"
-repository: "https://github.com/RitickSaha/glassmorphism"
-issue_tracker: "https://github.com/RitickSaha/glassmorphism/issues"
+description: >-
+  Glassmorphic (frosted glass) containers for Flutter with backdrop blur,
+  gradient fill, gradient borders, shadows and size-to-child layout.
+version: 4.0.0
+repository: https://github.com/RitickSaha/glassmorphism
+issue_tracker: https://github.com/RitickSaha/glassmorphism/issues
+topics:
+  - glassmorphism
+  - ui
+  - widget
+  - blur
+  - glass
 
 environment:
-  sdk: '>=2.12.0 <3.0.0'
-  flutter: ">=1.17.0"
+  sdk: ">=3.5.0 <4.0.0"
+  flutter: ">=3.24.0"
 
 dependencies:
   flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_lints: ^5.0.0
+  flutter_test:
     sdk: flutter
