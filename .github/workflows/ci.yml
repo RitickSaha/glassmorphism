@@ -35,3 +35,25 @@ jobs:
       - name: Validate package
         if: matrix.flutter-version == 'any'
         run: dart pub publish --dry-run
+
+  example-apk:
+    name: Build example APK
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+      - name: Build APK
+        working-directory: example
+        run: flutter build apk --release
+      - uses: actions/upload-artifact@v4
+        with:
+          name: glassmorphism-example-apk
+          path: example/build/app/outputs/flutter-apk/app-release.apk
+          retention-days: 30
