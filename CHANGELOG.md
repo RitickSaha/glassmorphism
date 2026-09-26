@@ -49,8 +49,11 @@ features and brings the package up to date with current Flutter.
 ### Other
 
 - Added widget tests, lints and CI.
-- Rewrote the example app so it runs offline, and regenerated its platform
-  folders for current Flutter.
+- Reworked the example app. The showcase screen with live pub.dev stats now
+  uses pub.dev's JSON API instead of scraping HTML. It loads without blocking
+  startup, handles errors with a retry button and also works on the web. A new
+  gallery page shows every feature. Regenerated the platform folders for
+  current Flutter.
 - Removed committed build artifacts, IDE files and lock files.
 
 ## [3.0.0] - 26 April 2021.
