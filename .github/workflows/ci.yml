@@ -49,11 +49,13 @@ jobs:
       - uses: subosito/flutter-action@v2
         with:
           channel: stable
-      - name: Build APK
+      # One APK per CPU architecture keeps each download small;
+      # arm64-v8a runs on nearly all current phones.
+      - name: Build APKs
         working-directory: example
-        run: flutter build apk --release
+        run: flutter build apk --release --split-per-abi
       - uses: actions/upload-artifact@v4
         with:
           name: glassmorphism-example-apk
-          path: example/build/app/outputs/flutter-apk/app-release.apk
+          path: example/build/app/outputs/flutter-apk/app-*-release.apk
           retention-days: 30
